@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meshy</title>
+  <style>
+    body {
+      background: #181818;
+      color: #fff;
+      line-height: 1.5;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 50px 0;
+      box-sizing: border-box;
+      font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, Inter;
+    }
+
+
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    p {
+      color: #DEDEDE;
+      font-size: 12px;
+      margin: 4px 0;
+      font-weight: 400;
+    }
+
+    p a {
+      color: #6C99F2;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+
+    .retry {
+      display: none;
+      border: 1px solid #6C99F2;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .retry:hover {
+      background-color: #6c99f21f;
+    }
+
+    .retry a {
+      color: #6C99F2;
+      text-decoration: none;
+      display: block;
+      padding: 8px 16px;
+      height: 100%;
+    }
+
+    .cat {
+      max-width: 288px;
+      max-height: 288px;
+    }
+
+    .countdown {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="https://cdn.meshy.ai/status-page-assets/cybercat.webp" alt="" class="cat" width="288" height="288" />
+  <div class="countdown" id="countDown">
+    <span class="hour" id="hour"></span>:
+    <span class="minute" id="minute"></span>:
+    <span class="second" id="second"></span>
+  </div>
+  <div class="retry" id="retry">
+    <a href="http://www.meshy.ai" target="_blank" rel="noopener noreferrer">Retry</a>
+  </div>
+  <h1>We'll Be Back Soon!</h1>
+  <p>Our website is currently undergoing scheduled maintenance.</p>
+  <p>We’re working hard to improve your experience.</p>
+  <p>If you need immediate assistance, please <a href="https://discord.com/invite/KgD5yVM9Y4" target="_blank"
+      rel="noopener noreferrer">join our Discord
+      community.</a></p>
+  <p style="margin-top: 50px;"><a href="https://status.meshy.ai/" target="_blank" rel="noopener noreferrer">Meshy Status
+      Page →</a></p>
+
+</body>
+<script>
+  const padding = (num) => {
+    return num.toString().padStart(2, '0');
+  }
+  function countDown() {
+    const endTime = new Date('2024-09-05T03:00:00Z').getTime();
+    const now = new Date().getTime();
+    const timeLeft = endTime - now;
+    const hours = Math.floor((timeLeft) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    document.getElementById('hour').innerText = padding(hours) + 'h ';
+    document.getElementById('minute').innerText = padding(minutes) + 'm ';
+    document.getElementById('second').innerText = padding(seconds) + 's';
+    if (timeLeft < 0) {
+      document.getElementById('countDown').style.display = 'none';
+      document.getElementById('retry').style.display = 'block';
+    }
+  }
+  countDown();
+  setInterval(countDown, 1000);
+
+</script>
+
+</html>
